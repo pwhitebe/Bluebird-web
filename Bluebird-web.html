@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title> - jsFiddle demo</title>
+  <title>Bluebird Web</title>
   
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
   
@@ -17,12 +17,15 @@ $('#tweetSubmit').on('click', function(ev) {
     ev.preventDefault();
     // Remove existing iframe
     $('#tweetBtn iframe').remove();
+    //http://stackoverflow.com/questions/596351/how-can-i-get-which-radio-is-selected-via-jquery
+    var contextstring = "cdcString:" + $('input[name=genderRadio]:checked', '#cdcform').val()
+    + $("#flutype option:selected").text(); 
     // Generate new markup
     var tweetBtn = $('<a></a>')
         .addClass('twitter-share-button')
         .attr('href', 'http://twitter.com/share')
         .attr('data-url', 'http://test.com')
-        .attr('data-text', $('#tweetText').val());
+        .attr('data-text', contextstring);
     $('#tweetBtn').append(tweetBtn);
     twttr.widgets.load();
 });
@@ -34,18 +37,25 @@ $('#tweetSubmit').on('click', function(ev) {
 
 </head>
 <body>
-  <div id="tweetBtn">
-    <a class="twitter-share-button" href="http://twitter.com/share" data-url="http://test.com" data-text="REPLACEME">Tweet</a>
-   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
+
 
 <br />
-<form>
-    <label for="tweetText">Tweet text:</label>            
-    <input type="text" name="tweetText" id="tweetText" />
+<form id="cdcform">
+    <label for="genderRadio">Gender:</label>            
+    <input type="radio" name="genderRadio" value= "male" id="tweetRadioMale"/> Male 
+    <input type="radio" name="genderRadio" value= "female" id="tweetRadioFemale"/> Female <br>
+    <select id="flutype">
+        <option value="itchy">itchy</option>
+        <option value="sneezy">sneezy</option>
+        <option value="hurty">hurty</option>
+        <option value="peanutbuttery">peanutbuttery</option>
+    </select><br>
     <input type="submit" value="Update" id="tweetSubmit" />
 </form>
-  
+  <div id="tweetBtn">
+    <a class="twitter-share-button" href="http://twitter.com/share" data-url="http://cdc.gov" data-text="REPLACEME" >Tweet</a>
+   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>  
 </body>
 
 
