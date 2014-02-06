@@ -24,7 +24,7 @@ $('#tweetSubmit').on('click', function(ev) {
     var tweetBtn = $('<a></a>')
         .addClass('twitter-share-button')
         .attr('href', 'http://twitter.com/share')
-        .attr('data-url', 'http://test.com')
+        .attr('data-url', 'http://cdc.gov')
         .attr('data-text', contextstring);
     $('#tweetBtn').append(tweetBtn);
     twttr.widgets.load();
